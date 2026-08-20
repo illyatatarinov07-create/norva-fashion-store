@@ -1,0 +1,2807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NØRVA — Drop 04 / Autumn 2026 Archive</title>
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM & MODERN BESPOKE THEME
+       ========================================================================== */
+    :root {
+      --bg-canvas: #09090B;
+      --bg-surface: #111114;
+      --bg-surface-elevated: #18181D;
+      --bg-subtle: #202026;
+      
+      --text-primary: #F4F4F0;
+      --text-secondary: #96969E;
+      --text-muted: #62626B;
+      --text-label: #85858E;
+      
+      --accent: #C8FF3D;
+      --accent-hover: #b5ec2d;
+      --accent-muted: rgba(200, 255, 61, 0.12);
+      
+      --border-dim: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.16);
+      --border-bright: rgba(255, 255, 255, 0.35);
+      
+      --font-display: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      
+      --header-h: 74px;
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.45;
+      background-color: var(--bg-canvas);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+      outline: none;
+    }
+
+    input {
+      font-family: inherit;
+      outline: none;
+      border: none;
+      background: none;
+      color: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1.25rem;
+      }
+    }
+
+    /* Editorial Micro Tags */
+    .editorial-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .editorial-label::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent);
+    }
+
+    .badge-pill {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid var(--border-dim);
+      background: rgba(17, 17, 20, 0.85);
+      backdrop-filter: blur(8px);
+      color: var(--text-secondary);
+    }
+
+    .badge-pill.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-family: var(--font-display);
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      transition: all 0.25s var(--ease-out);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .btn-solid {
+      background: var(--text-primary);
+      color: var(--bg-canvas);
+    }
+
+    .btn-solid:hover {
+      background: var(--accent);
+      color: var(--bg-canvas);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border-medium);
+      color: var(--text-primary);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: var(--bg-canvas);
+      font-weight: 700;
+    }
+
+    .btn-accent:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: var(--header-h);
+      background: rgba(9, 9, 11, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-dim);
+      z-index: 1000;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(9, 9, 11, 0.96);
+      border-bottom-color: var(--border-medium);
+    }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo-box {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--text-primary);
+    }
+
+    .logo-sub {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      border-left: 1px solid var(--border-medium);
+      padding-left: 0.75rem;
+    }
+
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+    }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+      position: relative;
+      padding: 0.35rem 0;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.25s var(--ease-out);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .header-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      padding: 0.4rem 0.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .action-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .action-btn svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 1.7;
+    }
+
+    .cart-counter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      background: var(--accent);
+      color: var(--bg-canvas);
+      margin-left: 2px;
+    }
+
+    .hamburger-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+    }
+
+    .hamburger-toggle span {
+      display: block;
+      width: 100%;
+      height: 1.5px;
+      background: var(--text-primary);
+      transition: transform 0.2s ease;
+    }
+
+    /* Mobile Overlay */
+    .mobile-nav-panel {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      width: 100%;
+      height: calc(100vh - var(--header-h));
+      background: rgba(9, 9, 11, 0.98);
+      backdrop-filter: blur(24px);
+      z-index: 999;
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.4s var(--ease-out), opacity 0.4s ease;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .mobile-nav-panel.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-links a {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    /* ==========================================================================
+       HERO — ASYMMETRIC EDITORIAL CAMPAIGN
+       ========================================================================== */
+    .hero-editorial {
+      position: relative;
+      border-bottom: 1px solid var(--border-dim);
+      padding: 3.5rem 0 4.5rem;
+      background: radial-gradient(circle at 80% 20%, rgba(200, 255, 61, 0.03) 0%, transparent 60%);
+    }
+
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    .hero-meta-bar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.75rem, 5.5vw, 5.2rem);
+      font-weight: 700;
+      line-height: 0.94;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+    }
+
+    .hero-h1 em {
+      font-style: normal;
+      font-weight: 300;
+      color: var(--text-secondary);
+      display: block;
+    }
+
+    .hero-p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .hero-spec-strip {
+      display: flex;
+      gap: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-dim);
+      width: 100%;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .spec-item .label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .spec-item .value {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .hero-photo-wrapper {
+      position: relative;
+      height: 640px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+    }
+
+    .hero-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(105%) brightness(95%);
+      transition: transform 0.8s var(--ease-out);
+    }
+
+    .hero-photo-wrapper:hover .hero-photo-img {
+      transform: scale(1.02);
+    }
+
+    .hero-photo-badge {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      right: 1.5rem;
+      background: rgba(9, 9, 11, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-medium);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .photo-badge-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .photo-badge-sub {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       MARQUEE TICKER
+       ========================================================================== */
+    .ticker-bar {
+      border-bottom: 1px solid var(--border-dim);
+      background: var(--bg-surface);
+      overflow: hidden;
+      padding: 0.9rem 0;
+      white-space: nowrap;
+      display: flex;
+      user-select: none;
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 3.5rem;
+      animation: tickerRun 30s linear infinite;
+    }
+
+    .ticker-node {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    .ticker-node::after {
+      content: '///';
+      color: var(--accent);
+      font-size: 0.7rem;
+    }
+
+    @keyframes tickerRun {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ==========================================================================
+       SELECTED PIECES — ASYMMETRICAL FEATURED GRID
+       ========================================================================== */
+    .section-editorial-spacing {
+      padding: 6.5rem 0;
+    }
+
+    .section-headline-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2.75rem;
+      border-bottom: 1px solid var(--border-dim);
+      padding-bottom: 1.25rem;
+    }
+
+    .headline-main {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.2vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    /* Asymmetric 4-Product Layout */
+    .featured-asymmetric-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1.5rem;
+    }
+
+    .featured-asymmetric-grid .card-primary-span {
+      grid-row: span 2;
+    }
+
+    /* Product Card Architecture */
+    .piece-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-dim);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.25s ease;
+    }
+
+    .piece-card:hover {
+      border-color: var(--border-bright);
+    }
+
+    .piece-media {
+      position: relative;
+      overflow: hidden;
+      background: #141418;
+      aspect-ratio: 4 / 5;
+    }
+
+    .card-primary-span .piece-media {
+      aspect-ratio: 4 / 5.2;
+    }
+
+    .piece-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(103%) brightness(96%);
+      transition: transform 0.6s var(--ease-out);
+    }
+
+    .piece-card:hover .piece-media img {
+      transform: scale(1.04);
+    }
+
+    .piece-tag-corner {
+      position: absolute;
+      top: 0.85rem;
+      left: 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-primary);
+      background: rgba(9, 9, 11, 0.8);
+      backdrop-filter: blur(6px);
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--border-dim);
+    }
+
+    .piece-status-tag {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--bg-canvas);
+      padding: 0.2rem 0.5rem;
+      font-weight: 700;
+    }
+
+    .piece-info-box {
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-grow: 1;
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .piece-code-cat {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .piece-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      line-height: 1.3;
+    }
+
+    .card-primary-span .piece-title {
+      font-size: 1.15rem;
+    }
+
+    .piece-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.5rem;
+    }
+
+    .piece-price {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .piece-quick-add {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--border-dim);
+      background: transparent;
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    .piece-card:hover .piece-quick-add {
+      border-color: var(--text-primary);
+      background: var(--text-primary);
+      color: var(--bg-canvas);
+    }
+
+    .piece-quick-add:hover {
+      background: var(--accent) !important;
+      border-color: var(--accent) !important;
+      color: var(--bg-canvas) !important;
+    }
+
+    /* ==========================================================================
+       CATEGORY ARCHIVES — REAL STREET SILHOUETTES
+       ========================================================================== */
+    .category-triptych {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .category-panel {
+      position: relative;
+      height: 540px;
+      border: 1px solid var(--border-dim);
+      background: var(--bg-surface);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem;
+    }
+
+    .category-bg-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.72) contrast(108%);
+      transition: transform 0.7s var(--ease-out), filter 0.5s ease;
+    }
+
+    .category-panel:hover .category-bg-photo {
+      transform: scale(1.05);
+      filter: brightness(0.55) contrast(115%);
+    }
+
+    .category-panel-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .category-panel-bottom {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .category-h3 {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .category-desc {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+      margin-top: 0.4rem;
+    }
+
+    .category-circle-btn {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-medium);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(9, 9, 11, 0.7);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s var(--ease-out);
+    }
+
+    .category-panel:hover .category-circle-btn {
+      background: var(--accent);
+      color: var(--bg-canvas);
+      border-color: var(--accent);
+      transform: rotate(-45deg);
+    }
+
+    /* ==========================================================================
+       EDITORIAL MANIFESTO BLOCK
+       ========================================================================== */
+    .editorial-manifesto {
+      border-top: 1px solid var(--border-dim);
+      border-bottom: 1px solid var(--border-dim);
+      background: var(--bg-surface);
+    }
+
+    .manifesto-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+    }
+
+    .manifesto-body {
+      padding: 6rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2.25rem;
+    }
+
+    .manifesto-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+
+    .manifesto-p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    .manifesto-visual {
+      position: relative;
+      min-height: 520px;
+      border-left: 1px solid var(--border-dim);
+    }
+
+    .manifesto-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .manifesto-stamp {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      background: rgba(9, 9, 11, 0.9);
+      border: 1px solid var(--border-dim);
+      padding: 0.5rem 0.85rem;
+      color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       FULL PRODUCT COLLECTION (CATALOG)
+       ========================================================================== */
+    .catalog-filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .catalog-tab {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.25rem;
+      border: 1px solid var(--border-dim);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .catalog-tab:hover {
+      color: var(--text-primary);
+      border-color: var(--border-medium);
+    }
+
+    .catalog-tab.active {
+      background: var(--accent);
+      color: var(--bg-canvas);
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* ==========================================================================
+       VALUES SECTION (WHY NØRVA)
+       ========================================================================== */
+    .values-strip {
+      border-top: 1px solid var(--border-dim);
+      background: var(--bg-canvas);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-left: 1px solid var(--border-dim);
+    }
+
+    .value-box {
+      padding: 4.5rem 3rem;
+      border-right: 1px solid var(--border-dim);
+      border-bottom: 1px solid var(--border-dim);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transition: background 0.3s ease;
+    }
+
+    .value-box:hover {
+      background: var(--bg-surface);
+    }
+
+    .value-num {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    .value-icon {
+      width: 36px;
+      height: 36px;
+      stroke: var(--text-primary);
+      stroke-width: 1.5;
+    }
+
+    .value-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    .value-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       NEWSLETTER DISPATCH
+       ========================================================================== */
+    .newsletter-section {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-dim);
+      border-bottom: 1px solid var(--border-dim);
+      padding: 6.5rem 2rem;
+    }
+
+    .newsletter-wrapper {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .newsletter-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .newsletter-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .newsletter-form-box {
+      width: 100%;
+      margin-top: 0.5rem;
+      display: flex;
+      border: 1px solid var(--border-medium);
+      background: var(--bg-canvas);
+      transition: border-color 0.2s ease;
+    }
+
+    .newsletter-form-box:focus-within {
+      border-color: var(--accent);
+    }
+
+    .newsletter-email-input {
+      flex: 1;
+      padding: 1.1rem 1.4rem;
+      font-size: 0.92rem;
+      color: var(--text-primary);
+    }
+
+    .newsletter-email-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .newsletter-submit-btn {
+      padding: 0 2.25rem;
+      background: var(--accent);
+      color: var(--bg-canvas);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s ease;
+    }
+
+    .newsletter-submit-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .newsletter-status-msg {
+      display: none;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    /* ==========================================================================
+       FOOTER
+       ========================================================================== */
+    .site-footer {
+      background: var(--bg-canvas);
+      padding: 5rem 0 3rem;
+    }
+
+    .footer-grid-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 3.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 320px;
+      margin-top: 1rem;
+    }
+
+    .footer-col-header {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-link-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .footer-link-list a {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    .footer-link-list a:hover {
+      color: var(--accent);
+    }
+
+    .footer-grid-bottom {
+      border-top: 1px solid var(--border-dim);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       MODALS, CART DRAWER & SEARCH
+       ========================================================================== */
+    .backdrop-curtain {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .backdrop-curtain.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Cart Drawer */
+    .cart-drawer-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-medium);
+      z-index: 2100;
+      transform: translateX(100%);
+      transition: transform 0.4s var(--ease-out);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-drawer-panel.open {
+      transform: translateX(0);
+    }
+
+    .cart-panel-head {
+      padding: 1.75rem;
+      border-bottom: 1px solid var(--border-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-panel-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .close-icon-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .close-icon-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .cart-panel-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .cart-empty-state {
+      margin: auto;
+      text-align: center;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .cart-item-card {
+      display: grid;
+      grid-template-columns: 75px 1fr auto;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-dim);
+      align-items: center;
+    }
+
+    .cart-item-thumb {
+      width: 75px;
+      height: 95px;
+      background: var(--bg-canvas);
+      border: 1px solid var(--border-dim);
+      overflow: hidden;
+    }
+
+    .cart-item-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .cart-item-name {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .cart-item-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .cart-item-price {
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .cart-qty-ctrl-box {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--border-dim);
+      width: max-content;
+      margin-top: 0.35rem;
+    }
+
+    .qty-toggle-btn {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      background: transparent;
+      transition: background 0.2s ease;
+    }
+
+    .qty-toggle-btn:hover {
+      background: var(--bg-subtle);
+    }
+
+    .qty-number {
+      padding: 0 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+
+    .cart-item-del {
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .cart-item-del:hover {
+      color: #ff5555;
+    }
+
+    .cart-panel-foot {
+      padding: 1.75rem;
+      border-top: 1px solid var(--border-dim);
+      background: var(--bg-canvas);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .cart-total-price {
+      color: var(--accent);
+      font-size: 1.35rem;
+    }
+
+    /* Quick View Modal */
+    .quick-modal-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -46%);
+      width: 92%;
+      max-width: 880px;
+      max-height: 90vh;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-medium);
+      z-index: 2200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s var(--ease-out);
+      overflow-y: auto;
+    }
+
+    .quick-modal-box.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%);
+    }
+
+    .quick-modal-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      z-index: 10;
+      background: var(--bg-canvas);
+    }
+
+    .quick-modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .quick-modal-media {
+      aspect-ratio: 4 / 5;
+      background: var(--bg-canvas);
+    }
+
+    .quick-modal-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .quick-modal-info {
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .quick-title-h2 {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .quick-price-val {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 0.35rem;
+    }
+
+    .quick-desc-text {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-top: 0.75rem;
+    }
+
+    .size-picker-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .size-picker-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .size-btn-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .size-chip {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .size-chip:hover {
+      border-color: var(--text-primary);
+    }
+
+    .size-chip.selected {
+      background: var(--text-primary);
+      color: var(--bg-canvas);
+      border-color: var(--text-primary);
+    }
+
+    .quick-add-action-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    /* Live Search Overlay */
+    .search-panel-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(9, 9, 11, 0.97);
+      backdrop-filter: blur(24px);
+      z-index: 2300;
+      padding: 4rem 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .search-panel-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .search-panel-container {
+      width: 100%;
+      max-width: 780px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .search-panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .search-input-field-wrap {
+      border-bottom: 2px solid var(--border-medium);
+      padding-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .search-main-input {
+      width: 100%;
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .search-main-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-results-list {
+      max-height: 55vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 0.75rem;
+      border: 1px solid var(--border-dim);
+      background: var(--bg-surface);
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-result-item:hover {
+      border-color: var(--accent);
+    }
+
+    .search-result-thumb {
+      width: 48px;
+      height: 62px;
+      object-fit: cover;
+    }
+
+    .search-result-info {
+      flex: 1;
+    }
+
+    .search-result-name {
+      font-family: var(--font-display);
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .search-result-price {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .search-empty-text {
+      text-align: center;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      padding: 3rem 0;
+    }
+
+    /* Toast System */
+    .toast-stack {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 3000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      pointer-events: none;
+    }
+
+    .toast-msg {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--accent);
+      color: var(--text-primary);
+      padding: 0.9rem 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s var(--ease-out);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .toast-msg.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast-dot-indicator {
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE BREAKPOINTS (1440, 1200, 992, 768, 480, 375)
+       ========================================================================== */
+    @media (max-width: 1200px) {
+      .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .featured-asymmetric-grid {
+        grid-template-columns: 1.2fr 1fr;
+      }
+      .footer-grid-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      .hero-photo-wrapper {
+        height: 480px;
+      }
+      .featured-asymmetric-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .featured-asymmetric-grid .card-primary-span {
+        grid-row: auto;
+        grid-column: span 2;
+      }
+      .category-triptych {
+        grid-template-columns: 1fr;
+      }
+      .category-panel {
+        height: 360px;
+      }
+      .manifesto-grid {
+        grid-template-columns: 1fr;
+      }
+      .manifesto-visual {
+        min-height: 400px;
+        border-left: none;
+        border-top: 1px solid var(--border-dim);
+      }
+      .manifesto-body {
+        padding: 4.5rem 2rem;
+      }
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+      .value-box {
+        border-right: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --header-h: 66px;
+      }
+      .nav-desktop {
+        display: none;
+      }
+      .hamburger-toggle {
+        display: flex;
+      }
+      .featured-asymmetric-grid, .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      .featured-asymmetric-grid .card-primary-span {
+        grid-column: span 2;
+      }
+      .quick-modal-grid {
+        grid-template-columns: 1fr;
+      }
+      .quick-modal-media {
+        max-height: 320px;
+      }
+      .quick-modal-info {
+        padding: 2rem 1.5rem;
+      }
+      .section-headline-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .newsletter-form-box {
+        flex-direction: column;
+      }
+      .newsletter-submit-btn {
+        padding: 1rem;
+      }
+      .footer-grid-top {
+        grid-template-columns: 1fr;
+      }
+      .footer-grid-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .cart-drawer-panel {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .featured-asymmetric-grid, .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+      .featured-asymmetric-grid .card-primary-span {
+        grid-column: auto;
+      }
+      .hero-cta-group {
+        width: 100%;
+      }
+      .hero-cta-group .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. HEADER
+       ========================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <div class="logo-box">
+        <a href="#" class="logo">NØRVA</a>
+        <span class="logo-sub">AUTUMN 2026</span>
+      </div>
+
+      <nav class="nav-desktop">
+        <a href="#collection" class="nav-link">SHOP</a>
+        <a href="#featured" class="nav-link">NEW IN</a>
+        <a href="#categories" class="nav-link">COLLECTIONS</a>
+        <a href="#editorial" class="nav-link">ABOUT</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="action-btn" id="searchTriggerBtn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <span>SEARCH</span>
+        </button>
+
+        <button class="action-btn" id="accountBtn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+
+        <button class="action-btn" id="cartTriggerBtn" aria-label="Bag">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-counter" id="cartCounter">0</span>
+        </button>
+
+        <button class="hamburger-toggle" id="hamburgerBtn" aria-label="Menu">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div class="mobile-nav-panel" id="mobileNavPanel">
+    <div class="mobile-links">
+      <a href="#collection" class="mobile-link">SHOP</a>
+      <a href="#featured" class="mobile-link">NEW IN</a>
+      <a href="#categories" class="mobile-link">COLLECTIONS</a>
+      <a href="#editorial" class="mobile-link">ABOUT</a>
+    </div>
+    <div>
+      <p class="editorial-label">DROP 04 / EDITION 2026</p>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-top:0.4rem;">BERLIN // TOKYO ATELIER</p>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         2. HERO SECTION — EDITORIAL CAMPAIGN
+         ========================================================================== -->
+    <section class="hero-editorial">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <div class="hero-meta-bar">
+            <span class="editorial-label">DROP 04 / AUTUMN 2026</span>
+            <span class="badge-pill active">LIMITED RELEASE</span>
+          </div>
+
+          <h1 class="hero-h1">
+            BUILT FOR THE <em>NEXT GENERATION.</em>
+          </h1>
+
+          <p class="hero-p">
+            Essential pieces. Distinct silhouettes. No unnecessary noise. Crafted for functional city living with architectural drape and heavy organic textiles.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#collection" class="btn btn-solid">SHOP COLLECTION</a>
+            <a href="#featured" class="btn btn-outline">EXPLORE NEW IN</a>
+          </div>
+
+          <div class="hero-spec-strip">
+            <div class="spec-item">
+              <span class="label">EDITION</span>
+              <span class="value">NRV-D04</span>
+            </div>
+            <div class="spec-item">
+              <span class="label">LOCATION</span>
+              <span class="value">BERLIN // TOKYO</span>
+            </div>
+            <div class="spec-item">
+              <span class="label">MATERIALITY</span>
+              <span class="value">HEAVYWEIGHT</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-photo-wrapper">
+          <!-- Real candid street fashion photography (Unsplash) -->
+          <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80" alt="NØRVA Autumn 2026 Street Editorial Campaign" class="hero-photo-img">
+          
+          <div class="hero-photo-badge">
+            <div>
+              <p class="photo-badge-title">CAMPAIGN LOOK 01</p>
+              <p class="photo-badge-sub">STRUCTURED NYLON SHELL & OVERSIZED DRAPE</p>
+            </div>
+            <span class="badge-pill">NEW / 04</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3. MARQUEE
+         ========================================================================== -->
+    <div class="ticker-bar">
+      <div class="ticker-track">
+        <div class="ticker-node">NØRVA</div>
+        <div class="ticker-node">NEW SEASON</div>
+        <div class="ticker-node">DROP 04</div>
+        <div class="ticker-node">DESIGNED FOR MOTION</div>
+        <div class="ticker-node">NØRVA</div>
+        <div class="ticker-node">NEW SEASON</div>
+        <div class="ticker-node">DROP 04</div>
+        <div class="ticker-node">DESIGNED FOR MOTION</div>
+        <div class="ticker-node">NØRVA</div>
+        <div class="ticker-node">NEW SEASON</div>
+        <div class="ticker-node">DROP 04</div>
+        <div class="ticker-node">DESIGNED FOR MOTION</div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         4. FEATURED PRODUCTS (SELECTED PIECES)
+         ========================================================================== -->
+    <section class="section-editorial-spacing" id="featured">
+      <div class="container">
+        <div class="section-headline-row">
+          <div>
+            <span class="editorial-label">CURATED SELECTION</span>
+            <h2 class="headline-main" style="margin-top:0.4rem;">SELECTED PIECES</h2>
+          </div>
+          <p style="font-size:0.85rem; color:var(--text-secondary); max-width:320px; font-family:var(--font-mono);">
+            [04 CORE SILHOUETTES CRAFTED FROM HIGH-DENSITY CUSTOM WEAVES]
+          </p>
+        </div>
+
+        <div class="featured-asymmetric-grid" id="featuredGrid">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         5. CATEGORY ARCHIVES (MEN / WOMEN / UNISEX)
+         ========================================================================== -->
+    <section class="section-editorial-spacing" id="categories" style="padding-top: 0;">
+      <div class="container">
+        <div class="section-headline-row">
+          <div>
+            <span class="editorial-label">ARCHETYPES</span>
+            <h2 class="headline-main" style="margin-top:0.4rem;">COLLECTIONS</h2>
+          </div>
+        </div>
+
+        <div class="category-triptych">
+          <!-- MEN Card with Real Streetwear Photo -->
+          <div class="category-panel" onclick="filterByGender('men')">
+            <img src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?auto=format&fit=crop&w=900&q=80" alt="NØRVA Men Street Silhouette" class="category-bg-photo">
+            <div class="category-panel-top">
+              <span class="badge-pill">01 // MEN</span>
+            </div>
+            <div class="category-panel-bottom">
+              <div>
+                <h3 class="category-h3">MEN</h3>
+                <p class="category-desc">OVERSIZED LAYERING & TECH OUTERWEAR</p>
+              </div>
+              <div class="category-circle-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- WOMEN Card with Real Streetwear Photo -->
+          <div class="category-panel" onclick="filterByGender('women')">
+            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80" alt="NØRVA Women Street Silhouette" class="category-bg-photo">
+            <div class="category-panel-top">
+              <span class="badge-pill">02 // WOMEN</span>
+            </div>
+            <div class="category-panel-bottom">
+              <div>
+                <h3 class="category-h3">WOMEN</h3>
+                <p class="category-desc">DRAPED KNITS & TAILORED CARGOS</p>
+              </div>
+              <div class="category-circle-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- UNISEX Card with Real Streetwear Photo -->
+          <div class="category-panel" onclick="filterByGender('unisex')">
+            <img src="https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?auto=format&fit=crop&w=900&q=80" alt="NØRVA Unisex Street Silhouette" class="category-bg-photo">
+            <div class="category-panel-top">
+              <span class="badge-pill">03 // UNISEX</span>
+            </div>
+            <div class="category-panel-bottom">
+              <div>
+                <h3 class="category-h3">UNISEX</h3>
+                <p class="category-desc">ADAPTIVE PROPORTIONS & MODULAR ACCESSORIES</p>
+              </div>
+              <div class="category-circle-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         6. EDITORIAL MANIFESTO SECTION
+         ========================================================================== -->
+    <section class="editorial-manifesto" id="editorial">
+      <div class="manifesto-grid">
+        <div class="manifesto-body">
+          <span class="editorial-label">PHILOSOPHY</span>
+          <h2 class="manifesto-title">
+            LESS NOISE.<br>MORE IDENTITY.
+          </h2>
+          <p class="manifesto-p">
+            NØRVA is built around the idea that clothing should say something without trying too hard. By stripping away transient fashion gimmicks, we focus purely on structural integrity, tactile fabric weights, and sharp urban proportions.
+          </p>
+          <div>
+            <a href="#collection" class="btn btn-outline">VIEW FULL ARCHIVE</a>
+          </div>
+        </div>
+
+        <div class="manifesto-visual">
+          <!-- Real candid editorial fashion shot (Unsplash) -->
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=1200&q=80" alt="NØRVA Campaign 04 Editorial Portrait">
+          <div class="manifesto-stamp">NØRVA / CAMPAIGN 04</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         7. PRODUCT COLLECTION (CATALOG)
+         ========================================================================== -->
+    <section class="section-editorial-spacing" id="collection">
+      <div class="container">
+        <div class="section-headline-row">
+          <div>
+            <span class="editorial-label">PRODUCT CATALOG</span>
+            <h2 class="headline-main" style="margin-top:0.4rem;">COLLECTION</h2>
+          </div>
+        </div>
+
+        <div class="catalog-filter-row" id="filterBar">
+          <button class="catalog-tab active" data-category="all">ALL [08]</button>
+          <button class="catalog-tab" data-category="jackets">JACKETS</button>
+          <button class="catalog-tab" data-category="tops">TOPS</button>
+          <button class="catalog-tab" data-category="bottoms">BOTTOMS</button>
+          <button class="catalog-tab" data-category="accessories">ACCESSORIES</button>
+        </div>
+
+        <div class="catalog-grid" id="collectionGrid">
+          <!-- Populated dynamically by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         8. WHY NØRVA (VALUES)
+         ========================================================================== -->
+    <section class="values-strip">
+      <div class="container">
+        <div class="values-grid">
+          <div class="value-box">
+            <span class="value-num">[01]</span>
+            <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h3 class="value-title">BUILT TO LAST</h3>
+            <p class="value-desc">Engineered with custom-milled high GSM textiles and reinforced seams built to withstand hundreds of city wears without losing shape.</p>
+          </div>
+
+          <div class="value-box">
+            <span class="value-num">[02]</span>
+            <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            <h3 class="value-title">RESPONSIBLE MATERIALS</h3>
+            <p class="value-desc">Certified organic GOTS combed cottons, repurposed technical ripstops, and completely plastic-free recyclable packaging.</p>
+          </div>
+
+          <div class="value-box">
+            <span class="value-num">[03]</span>
+            <svg class="value-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <h3 class="value-title">DESIGNED IN EUROPE</h3>
+            <p class="value-desc">Patterned and tested between Berlin and Milan studios for precision drape, movement comfort, and minimal brutalist styling.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         9. NEWSLETTER
+         ========================================================================== -->
+    <section class="newsletter-section">
+      <div class="container">
+        <div class="newsletter-wrapper">
+          <span class="editorial-label">DISPATCH LIST</span>
+          <h2 class="newsletter-title">GET THE NEXT DROP FIRST.</h2>
+          <p class="newsletter-desc">
+            Join the NØRVA list for early access, new releases and private drops. No spam. Only meaningful release communications.
+          </p>
+
+          <form class="newsletter-form-box" id="newsletterForm">
+            <input type="email" class="newsletter-email-input" id="newsletterEmail" placeholder="Enter your email" required autocomplete="email">
+            <button type="submit" class="newsletter-submit-btn">JOIN</button>
+          </form>
+          <div class="newsletter-status-msg" id="newsletterFeedback">✓ You're on the list.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       10. FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid-top">
+        <div>
+          <a href="#" class="logo">NØRVA</a>
+          <p class="footer-desc">Independent modern fashion brand. Engineered streetwear & essential archetypes.</p>
+          <div style="margin-top:1.5rem;">
+            <span class="badge-pill">DROP 04 // 2026</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-header">NAVIGATION</h4>
+          <ul class="footer-link-list">
+            <li><a href="#collection">Shop All</a></li>
+            <li><a href="#featured">New In</a></li>
+            <li><a href="#categories">Collections</a></li>
+            <li><a href="#editorial">About</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-header">SOCIAL</h4>
+          <ul class="footer-link-list">
+            <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://pinterest.com" target="_blank" rel="noopener">Pinterest</a></li>
+            <li><a href="https://tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-header">LEGAL</h4>
+          <ul class="footer-link-list">
+            <li><a href="#" onclick="showToast('Privacy Policy loaded'); return false;">Privacy</a></li>
+            <li><a href="#" onclick="showToast('Terms of Service loaded'); return false;">Terms</a></li>
+            <li><a href="#" onclick="showToast('Worldwide express shipping'); return false;">Shipping</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-grid-bottom">
+        <div>© 2026 NØRVA STUDIO. ALL RIGHTS RESERVED.</div>
+        <div>BERLIN // TOKYO</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SHOPPING BAG (CART DRAWER)
+       ========================================================================== -->
+  <div class="backdrop-curtain" id="cartBackdrop"></div>
+
+  <div class="cart-drawer-panel" id="cartDrawer">
+    <div class="cart-panel-head">
+      <h3 class="cart-panel-title">BAG (<span id="cartHeaderQty">0</span>)</h3>
+      <button class="close-icon-btn" id="closeCartBtn" aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="cart-panel-body" id="cartItemsList">
+      <!-- Injected by JavaScript -->
+    </div>
+
+    <div class="cart-panel-foot">
+      <div class="cart-total-row">
+        <span>TOTAL</span>
+        <span class="cart-total-price" id="cartTotalSum">$0</span>
+      </div>
+      <button class="btn btn-solid" id="checkoutTriggerBtn" style="width: 100%;">CHECKOUT</button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PRODUCT QUICK VIEW MODAL
+       ========================================================================== -->
+  <div class="backdrop-curtain" id="quickModalBackdrop"></div>
+
+  <div class="quick-modal-box" id="quickModal">
+    <button class="close-icon-btn quick-modal-close-btn" id="closeQuickBtn" aria-label="Close">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+
+    <div class="quick-modal-grid">
+      <div class="quick-modal-media">
+        <img id="modalProductImg" src="" alt="Product view">
+      </div>
+      <div class="quick-modal-info">
+        <div>
+          <span class="editorial-label" id="modalProductCategory">JACKET</span>
+          <h2 class="quick-title-h2" id="modalProductTitle" style="margin-top:0.4rem;">OVERSIZED STRUCTURE JACKET</h2>
+          <div class="quick-price-val" id="modalProductPrice">$189</div>
+          <p class="quick-desc-text" id="modalProductDesc">Engineered with high-density water-resistant nylon blend with articulated sleeves.</p>
+        </div>
+
+        <div class="size-picker-section">
+          <span class="size-picker-label">SELECT SIZE</span>
+          <div class="size-btn-group" id="modalSizeGroup">
+            <button class="size-chip" data-size="S">S</button>
+            <button class="size-chip selected" data-size="M">M</button>
+            <button class="size-chip" data-size="L">L</button>
+            <button class="size-chip" data-size="XL">XL</button>
+          </div>
+        </div>
+
+        <div class="quick-add-action-row">
+          <div class="cart-qty-ctrl-box" style="margin-top:0; padding:0.25rem;">
+            <button class="qty-toggle-btn" id="modalQtyMinus">-</button>
+            <span class="qty-number" id="modalQtyCount" style="padding: 0 0.8rem;">1</span>
+            <button class="qty-toggle-btn" id="modalQtyPlus">+</button>
+          </div>
+          <button class="btn btn-accent" id="modalAddCartBtn" style="flex: 1;">ADD TO BAG</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SEARCH OVERLAY
+       ========================================================================== -->
+  <div class="search-panel-overlay" id="searchOverlay">
+    <div class="search-panel-container">
+      <div class="search-panel-head">
+        <span class="editorial-label">CATALOG SEARCH</span>
+        <button class="close-icon-btn" id="closeSearchBtn" aria-label="Close">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="search-input-field-wrap">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" class="search-main-input" id="searchInput" placeholder="Search NØRVA..." autofocus autocomplete="off">
+      </div>
+
+      <div class="search-results-list" id="searchResultsContainer">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Stack -->
+  <div class="toast-stack" id="toastContainer"></div>
+
+  <!-- ==========================================================================
+       VANILLA JAVASCRIPT LOGIC
+       ========================================================================== -->
+  <script>
+    /* --------------------------------------------------------------------------
+       REAL PRODUCTS DATA ARCHIVE (Real Streetwear Photography)
+       -------------------------------------------------------------------------- */
+    const PRODUCTS = [
+      {
+        id: "p1",
+        code: "01",
+        sku: "NRV-04-01",
+        name: "OVERSIZED STRUCTURE JACKET",
+        price: 189,
+        category: "jackets",
+        gender: "unisex",
+        // Real photo of structured streetwear jacket in city
+        image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=80",
+        description: "Engineered from high-density water-resistant nylon blend with articulated sleeves, custom storm flap and gunmetal hardware.",
+        statusTag: "DROP 04",
+        featured: true
+      },
+      {
+        id: "p2",
+        code: "02",
+        sku: "NRV-04-02",
+        name: "HEAVYWEIGHT ESSENTIAL TEE",
+        price: 69,
+        category: "tops",
+        gender: "men",
+        // Real photo of heavyweight boxy streetwear tee
+        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80",
+        description: "320 GSM combed organic cotton with a structured boxy silhouette, dropped shoulder cut and reinforced ribbed collar.",
+        statusTag: "ESSENTIAL",
+        featured: true
+      },
+      {
+        id: "p3",
+        code: "03",
+        sku: "NRV-04-03",
+        name: "WIDE LEG CARGO",
+        price: 129,
+        category: "bottoms",
+        gender: "unisex",
+        // Real photo of wide leg street cargo trousers
+        image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=900&q=80",
+        description: "Relaxed modular cargo pant featuring ergonomic knee darts, adjustable hems, deep tactical pockets and matte black hardware.",
+        statusTag: "LIMITED",
+        featured: true
+      },
+      {
+        id: "p4",
+        code: "04",
+        sku: "NRV-04-04",
+        name: "NØRVA KNIT",
+        price: 99,
+        category: "tops",
+        gender: "women",
+        // Real photo of natural wool textured sweater
+        image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=900&q=80",
+        description: "Mid-weight wool and mohair blend sweater with subtle drop shoulder, wide collar and distressed raw hem details.",
+        statusTag: "LOW STOCK",
+        featured: true
+      },
+      {
+        id: "p5",
+        code: "05",
+        sku: "NRV-04-05",
+        name: "TECHNICAL HYBRID PARKA",
+        price: 245,
+        category: "jackets",
+        gender: "men",
+        // Real photo of outdoor utility parka / jacket
+        image: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=900&q=80",
+        description: "Thermal insulated shell with dual magnetic storm flaps, weather-sealed zips, extended hood visor and concealed pocket system.",
+        statusTag: "TECHNICAL",
+        featured: false
+      },
+      {
+        id: "p6",
+        code: "06",
+        sku: "NRV-04-06",
+        name: "BOXY HOODED SWEATSHIRT",
+        price: 115,
+        category: "tops",
+        gender: "unisex",
+        // Real photo of heavy French terry hoodie on street
+        image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=900&q=80",
+        description: "480 GSM ultra-heavy French terry hoodie. Double-layered hood, seamless front pouch, and micro-embroidered tonal branding.",
+        statusTag: "DROP 04",
+        featured: false
+      },
+      {
+        id: "p7",
+        code: "07",
+        sku: "NRV-04-07",
+        name: "PLEATED RELAXED TROUSER",
+        price: 139,
+        category: "bottoms",
+        gender: "women",
+        // Real photo of tailored drape trousers on city pavement
+        image: "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?auto=format&fit=crop&w=900&q=80",
+        description: "Tailored drape trouser cut from breathable wool-viscose blend. High-rise fit with deep front pleating and welt pockets.",
+        statusTag: "ARCHIVE",
+        featured: false
+      },
+      {
+        id: "p8",
+        code: "08",
+        sku: "NRV-04-08",
+        name: "TACTICAL MODULAR SLING",
+        price: 79,
+        category: "accessories",
+        gender: "unisex",
+        // Real photo of technical street crossbody sling bag
+        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=80",
+        description: "Cordura® 500D ripstop sling pack with Fidlock® magnetic V-buckle, waterproof YKK AquaGuard zippers and internal organizer.",
+        statusTag: "MODULAR",
+        featured: false
+      }
+    ];
+
+    /* --------------------------------------------------------------------------
+       STATE
+       -------------------------------------------------------------------------- */
+    let cart = [];
+    let modalState = {
+      product: null,
+      size: "M",
+      qty: 1
+    };
+
+    /* --------------------------------------------------------------------------
+       DOM REFERENCES
+       -------------------------------------------------------------------------- */
+    const featuredGrid = document.getElementById("featuredGrid");
+    const collectionGrid = document.getElementById("collectionGrid");
+    const filterBar = document.getElementById("filterBar");
+
+    // Header & Mobile Nav
+    const siteHeader = document.getElementById("siteHeader");
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const mobileNavPanel = document.getElementById("mobileNavPanel");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    // Cart Elements
+    const cartDrawer = document.getElementById("cartDrawer");
+    const cartBackdrop = document.getElementById("cartBackdrop");
+    const cartTriggerBtn = document.getElementById("cartTriggerBtn");
+    const closeCartBtn = document.getElementById("closeCartBtn");
+    const cartCounter = document.getElementById("cartCounter");
+    const cartHeaderQty = document.getElementById("cartHeaderQty");
+    const cartItemsList = document.getElementById("cartItemsList");
+    const cartTotalSum = document.getElementById("cartTotalSum");
+    const checkoutTriggerBtn = document.getElementById("checkoutTriggerBtn");
+
+    // Quick View Modal Elements
+    const quickModal = document.getElementById("quickModal");
+    const quickModalBackdrop = document.getElementById("quickModalBackdrop");
+    const closeQuickBtn = document.getElementById("closeQuickBtn");
+    const modalProductImg = document.getElementById("modalProductImg");
+    const modalProductCategory = document.getElementById("modalProductCategory");
+    const modalProductTitle = document.getElementById("modalProductTitle");
+    const modalProductPrice = document.getElementById("modalProductPrice");
+    const modalProductDesc = document.getElementById("modalProductDesc");
+    const modalSizeGroup = document.getElementById("modalSizeGroup");
+    const modalQtyMinus = document.getElementById("modalQtyMinus");
+    const modalQtyPlus = document.getElementById("modalQtyPlus");
+    const modalQtyCount = document.getElementById("modalQtyCount");
+    const modalAddCartBtn = document.getElementById("modalAddCartBtn");
+
+    // Search Overlay Elements
+    const searchOverlay = document.getElementById("searchOverlay");
+    const searchTriggerBtn = document.getElementById("searchTriggerBtn");
+    const closeSearchBtn = document.getElementById("closeSearchBtn");
+    const searchInput = document.getElementById("searchInput");
+    const searchResultsContainer = document.getElementById("searchResultsContainer");
+
+    // Toast & Newsletter
+    const toastContainer = document.getElementById("toastContainer");
+    const newsletterForm = document.getElementById("newsletterForm");
+    const newsletterFeedback = document.getElementById("newsletterFeedback");
+    const accountBtn = document.getElementById("accountBtn");
+
+    /* --------------------------------------------------------------------------
+       RENDER PRODUCTS (BESPOKE EDITORIAL CARDS)
+       -------------------------------------------------------------------------- */
+    function renderFeaturedGrid() {
+      const items = PRODUCTS.filter(p => p.featured);
+      
+      featuredGrid.innerHTML = items.map((product, idx) => {
+        const isFirst = idx === 0;
+        return `
+          <div class="piece-card ${isFirst ? 'card-primary-span' : ''}" onclick="openProductModal('${product.id}')">
+            <div class="piece-media">
+              <span class="piece-tag-corner">${product.code}</span>
+              <span class="piece-status-tag">${product.statusTag}</span>
+              <img src="${product.image}" alt="${product.name}" loading="lazy">
+            </div>
+            <div class="piece-info-box">
+              <div>
+                <div class="piece-code-cat">
+                  <span>${product.sku}</span>
+                  <span>${product.category}</span>
+                </div>
+                <h3 class="piece-title" style="margin-top: 0.35rem;">${product.name}</h3>
+              </div>
+              <div class="piece-price-row">
+                <span class="piece-price">$${product.price}</span>
+                <button class="piece-quick-add" onclick="event.stopPropagation(); quickAddProduct('${product.id}')">
+                  ADD TO BAG
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderCollectionGrid(category = "all") {
+      let filtered = PRODUCTS;
+      if (category !== "all") {
+        filtered = PRODUCTS.filter(p => p.category === category);
+      }
+
+      collectionGrid.innerHTML = filtered.map(product => `
+        <div class="piece-card" onclick="openProductModal('${product.id}')">
+          <div class="piece-media">
+            <span class="piece-tag-corner">${product.code}</span>
+            <span class="piece-status-tag">${product.statusTag}</span>
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+          </div>
+          <div class="piece-info-box">
+            <div>
+              <div class="piece-code-cat">
+                <span>${product.sku}</span>
+                <span>${product.category}</span>
+              </div>
+              <h3 class="piece-title" style="margin-top: 0.35rem;">${product.name}</h3>
+            </div>
+            <div class="piece-price-row">
+              <span class="piece-price">$${product.price}</span>
+              <button class="piece-quick-add" onclick="event.stopPropagation(); quickAddProduct('${product.id}')">
+                ADD TO BAG
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    /* --------------------------------------------------------------------------
+       CATALOG FILTERING & CATEGORY JUMPS
+       -------------------------------------------------------------------------- */
+    filterBar.addEventListener("click", (e) => {
+      const btn = e.target.closest(".catalog-tab");
+      if (!btn) return;
+
+      filterBar.querySelectorAll(".catalog-tab").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const cat = btn.dataset.category;
+      renderCollectionGrid(cat);
+    });
+
+    function filterByGender(gender) {
+      const collectionSection = document.getElementById("collection");
+      collectionSection.scrollIntoView({ behavior: "smooth" });
+
+      filterBar.querySelectorAll(".catalog-tab").forEach(b => b.classList.remove("active"));
+      const allBtn = filterBar.querySelector('[data-category="all"]');
+      if (allBtn) allBtn.classList.add("active");
+
+      const filtered = PRODUCTS.filter(p => p.gender === gender || p.gender === "unisex");
+      collectionGrid.innerHTML = filtered.map(product => `
+        <div class="piece-card" onclick="openProductModal('${product.id}')">
+          <div class="piece-media">
+            <span class="piece-tag-corner">${product.code}</span>
+            <span class="piece-status-tag">${product.statusTag}</span>
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+          </div>
+          <div class="piece-info-box">
+            <div>
+              <div class="piece-code-cat">
+                <span>${product.sku}</span>
+                <span>${product.category}</span>
+              </div>
+              <h3 class="piece-title" style="margin-top: 0.35rem;">${product.name}</h3>
+            </div>
+            <div class="piece-price-row">
+              <span class="piece-price">$${product.price}</span>
+              <button class="piece-quick-add" onclick="event.stopPropagation(); quickAddProduct('${product.id}')">
+                ADD TO BAG
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+
+      showToast(`Showing ${gender.toUpperCase()} silhouettes`);
+    }
+
+    /* --------------------------------------------------------------------------
+       QUICK VIEW MODAL LOGIC
+       -------------------------------------------------------------------------- */
+    function openProductModal(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+
+      modalState.product = product;
+      modalState.size = "M";
+      modalState.qty = 1;
+
+      modalProductImg.src = product.image;
+      modalProductImg.alt = product.name;
+      modalProductCategory.textContent = `${product.sku} // ${product.category}`;
+      modalProductTitle.textContent = product.name;
+      modalProductPrice.textContent = `$${product.price}`;
+      modalProductDesc.textContent = product.description;
+      modalQtyCount.textContent = "1";
+
+      modalSizeGroup.querySelectorAll(".size-chip").forEach(btn => {
+        btn.classList.toggle("selected", btn.dataset.size === "M");
+      });
+
+      quickModal.classList.add("open");
+      quickModalBackdrop.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeProductModal() {
+      quickModal.classList.remove("open");
+      quickModalBackdrop.classList.remove("active");
+      document.body.style.overflow = "";
+      modalState.product = null;
+    }
+
+    modalSizeGroup.addEventListener("click", (e) => {
+      const btn = e.target.closest(".size-chip");
+      if (!btn) return;
+
+      modalSizeGroup.querySelectorAll(".size-chip").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      modalState.size = btn.dataset.size;
+    });
+
+    modalQtyMinus.addEventListener("click", () => {
+      if (modalState.qty > 1) {
+        modalState.qty--;
+        modalQtyCount.textContent = modalState.qty;
+      }
+    });
+
+    modalQtyPlus.addEventListener("click", () => {
+      modalState.qty++;
+      modalQtyCount.textContent = modalState.qty;
+    });
+
+    modalAddCartBtn.addEventListener("click", () => {
+      if (!modalState.product) return;
+      addToCart(modalState.product, modalState.size, modalState.qty);
+      closeProductModal();
+      openCartDrawer();
+    });
+
+    closeQuickBtn.addEventListener("click", closeProductModal);
+    quickModalBackdrop.addEventListener("click", closeProductModal);
+
+    /* --------------------------------------------------------------------------
+       SHOPPING BAG (CART) LOGIC
+       -------------------------------------------------------------------------- */
+    function quickAddProduct(productId) {
+      const product = PRODUCTS.find(p => p.id === productId);
+      if (!product) return;
+      addToCart(product, "M", 1);
+      openCartDrawer();
+    }
+
+    function addToCart(product, size, qty = 1) {
+      const existing = cart.find(item => item.product.id === product.id && item.size === size);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ product, size, qty });
+      }
+
+      refreshCartDisplay();
+      showToast(`Added ${product.name} [${size}]`);
+    }
+
+    function updateItemQty(index, delta) {
+      if (!cart[index]) return;
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      refreshCartDisplay();
+    }
+
+    function removeItemFromCart(index) {
+      if (!cart[index]) return;
+      const name = cart[index].product.name;
+      cart.splice(index, 1);
+      refreshCartDisplay();
+      showToast(`Removed ${name}`);
+    }
+
+    function refreshCartDisplay() {
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      cartCounter.textContent = totalCount;
+      cartHeaderQty.textContent = totalCount;
+
+      const totalPrice = cart.reduce((sum, item) => sum + (item.product.price * item.qty), 0);
+      cartTotalSum.textContent = `$${totalPrice}`;
+
+      if (cart.length === 0) {
+        cartItemsList.innerHTML = `
+          <div class="cart-empty-state">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" style="color:var(--text-muted);"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <p>Your bag is currently empty.</p>
+            <button class="btn btn-outline" onclick="closeCartDrawer(); document.getElementById('collection').scrollIntoView({behavior:'smooth'});" style="padding: 0.6rem 1.25rem; font-size: 0.75rem;">DISCOVER ARCHIVE</button>
+          </div>
+        `;
+      } else {
+        cartItemsList.innerHTML = cart.map((item, idx) => `
+          <div class="cart-item-card">
+            <img src="${item.product.image}" alt="${item.product.name}" class="cart-item-thumb">
+            <div class="cart-item-details">
+              <h4 class="cart-item-name">${item.product.name}</h4>
+              <span class="cart-item-meta">SIZE: ${item.size} // ${item.product.sku}</span>
+              <span class="cart-item-price">$${item.product.price}</span>
+              <div class="cart-qty-ctrl-box">
+                <button class="qty-toggle-btn" onclick="updateItemQty(${idx}, -1)">-</button>
+                <span class="qty-number">${item.qty}</span>
+                <button class="qty-toggle-btn" onclick="updateItemQty(${idx}, 1)">+</button>
+              </div>
+            </div>
+            <button class="cart-item-del" onclick="removeItemFromCart(${idx})" aria-label="Remove">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            </button>
+          </div>
+        `).join("");
+      }
+    }
+
+    function openCartDrawer() {
+      cartDrawer.classList.add("open");
+      cartBackdrop.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeCartDrawer() {
+      cartDrawer.classList.remove("open");
+      cartBackdrop.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    cartTriggerBtn.addEventListener("click", openCartDrawer);
+    closeCartBtn.addEventListener("click", closeCartDrawer);
+    cartBackdrop.addEventListener("click", closeCartDrawer);
+
+    checkoutTriggerBtn.addEventListener("click", () => {
+      if (cart.length === 0) {
+        showToast("Your bag is empty");
+        return;
+      }
+      showToast("Checkout demo — payment integration can be connected here.");
+    });
+
+    /* --------------------------------------------------------------------------
+       SEARCH OVERLAY
+       -------------------------------------------------------------------------- */
+    function openSearchPanel() {
+      searchOverlay.classList.add("open");
+      document.body.style.overflow = "hidden";
+      setTimeout(() => searchInput.focus(), 100);
+      handleSearchQuery("");
+    }
+
+    function closeSearchPanel() {
+      searchOverlay.classList.remove("open");
+      document.body.style.overflow = "";
+      searchInput.value = "";
+    }
+
+    function handleSearchQuery(term) {
+      const q = term.trim().toLowerCase();
+      if (!q) {
+        searchResultsContainer.innerHTML = `
+          <div class="search-empty-text">
+            <p>Type to search jackets, tops, bottoms and accessories.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const matched = PRODUCTS.filter(p => 
+        p.name.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.sku.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+      );
+
+      if (matched.length === 0) {
+        searchResultsContainer.innerHTML = `
+          <div class="search-empty-text">
+            <p>No pieces found for "${term}".</p>
+          </div>
+        `;
+      } else {
+        searchResultsContainer.innerHTML = matched.map(p => `
+          <div class="search-result-item" onclick="closeSearchPanel(); openProductModal('${p.id}');">
+            <img src="${p.image}" alt="${p.name}" class="search-result-thumb">
+            <div class="search-result-info">
+              <span style="font-family:var(--font-mono); font-size:0.65rem; color:var(--text-muted);">${p.sku} // ${p.category}</span>
+              <h4 class="search-result-name">${p.name}</h4>
+            </div>
+            <div class="search-result-price">$${p.price}</div>
+          </div>
+        `).join("");
+      }
+    }
+
+    searchTriggerBtn.addEventListener("click", openSearchPanel);
+    closeSearchBtn.addEventListener("click", closeSearchPanel);
+    searchInput.addEventListener("input", (e) => handleSearchQuery(e.target.value));
+
+    /* --------------------------------------------------------------------------
+       MOBILE NAVIGATION
+       -------------------------------------------------------------------------- */
+    hamburgerBtn.addEventListener("click", () => {
+      const isOpen = mobileNavPanel.classList.contains("open");
+      if (isOpen) {
+        mobileNavPanel.classList.remove("open");
+        document.body.style.overflow = "";
+      } else {
+        mobileNavPanel.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileNavPanel.classList.remove("open");
+        document.body.style.overflow = "";
+      });
+    });
+
+    /* --------------------------------------------------------------------------
+       NEWSLETTER & ACCOUNT INTERACTIONS
+       -------------------------------------------------------------------------- */
+    newsletterForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = document.getElementById("newsletterEmail");
+      if (input.value) {
+        newsletterForm.style.display = "none";
+        newsletterFeedback.style.display = "block";
+        showToast("You're on the list.");
+      }
+    });
+
+    accountBtn.addEventListener("click", () => {
+      showToast("NØRVA Club — Member authentication portal");
+    });
+
+    /* --------------------------------------------------------------------------
+       TOAST FEEDBACK
+       -------------------------------------------------------------------------- */
+    function showToast(message) {
+      const toast = document.createElement("div");
+      toast.className = "toast-msg";
+      toast.innerHTML = `<span class="toast-dot-indicator"></span><span>${message}</span>`;
+      toastContainer.appendChild(toast);
+
+      setTimeout(() => toast.classList.add("show"), 10);
+      setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
+    /* --------------------------------------------------------------------------
+       GLOBAL KEYBOARD & SCROLL
+       -------------------------------------------------------------------------- */
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (quickModal.classList.contains("open")) closeProductModal();
+        if (cartDrawer.classList.contains("open")) closeCartDrawer();
+        if (searchOverlay.classList.contains("open")) closeSearchPanel();
+        if (mobileNavPanel.classList.contains("open")) {
+          mobileNavPanel.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+      }
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 30) {
+        siteHeader.classList.add("scrolled");
+      } else {
+        siteHeader.classList.remove("scrolled");
+      }
+    });
+
+    /* --------------------------------------------------------------------------
+       INITIALIZE
+       -------------------------------------------------------------------------- */
+    document.addEventListener("DOMContentLoaded", () => {
+      renderFeaturedGrid();
+      renderCollectionGrid("all");
+      refreshCartDisplay();
+    });
+  </script>
+</body>
+</html>

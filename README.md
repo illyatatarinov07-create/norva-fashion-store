@@ -35,4 +35,4 @@ Open `index.html` in a browser to view the website.
 
 ---
 
-Frontend development project by One Joy.
+Frontend development project by illya.
